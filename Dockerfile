@@ -29,7 +29,7 @@ RUN npm install -g lighthouse
 
 #COPY entrypoint.sh to container
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh && dos2unix /entrypoint.sh && mkdir -p /home/lighthouse/reports
+RUN chmod +x /entrypoint.sh && dos2unix /entrypoint.sh
 
 # Workdirectory of application
 WORKDIR /home/chrome/reports
