@@ -4,6 +4,7 @@ LABEL name="lighthouse-headless" maintainer="Naresh Anjuru <nareshanjuru@gmail.c
 
 ENV CHROME_VERSION="google-chrome-stable"
 ENV CHROME_FLAGS="--headless --disable-gpu --no-sandbox"
+ENV INSTALL_DIR = "/home/chrome/reports"
 
 # Install deps + add Chrome Stable + purge all the things
 RUN apt-get update && apt-get install -y \
@@ -29,10 +30,10 @@ RUN npm install -g lighthouse
 
 #COPY entrypoint.sh to container
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh && dos2unix /entrypoint.sh
+RUN chmod +x /entrypoint.sh && dos2unix /entrypoint.sh && mkdir $INSTALL_DIR
 
 # Workdirectory of application
-WORKDIR /home/chrome/reports
+WORKDIR $INSTALL_DIR
 
 # Disable Lighthouse error reporting to prevent prompt.
 ENV CI=true
